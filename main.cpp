@@ -17,11 +17,9 @@ int main() {
     }
 
     std::cout << "[+] Attached to RustClient.exe (PID: " << pid << ")\n";
-    std::cout << "[*] Starting aimbot loop...\n";
-
+    
     Aimbot aimbot(hProcess);
-    // Тут должен быть твой цикл (поток) с логикой
-    // aimbot.Run(); 
+    aimbot.Run();
 
     return 0;
 }
