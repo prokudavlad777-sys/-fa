@@ -1,6 +1,5 @@
 #pragma once
 #include <cmath>
-#include <algorithm>
 
 struct Vector3 {
     float x, y, z;
@@ -12,10 +11,6 @@ struct Vector3 {
 struct Vector2 {
     float x, y;
 };
-
-inline float Dot(const Vector3& a, const Vector3& b) {
-    return a.x * b.x + a.y * b.y + a.z * b.z;
-}
 
 inline Vector3 CalcAngle(const Vector3& src, const Vector3& dst) {
     Vector3 delta = src - dst;
@@ -33,19 +28,14 @@ inline bool WorldToScreen(const Vector3& pos, Vector2& screen, float matrix[16],
     screen.x = matrix[0] * pos.x + matrix[1] * pos.y + matrix[2] * pos.z + matrix[3];
     screen.y = matrix[4] * pos.x + matrix[5] * pos.y + matrix[6] * pos.z + matrix[7];
     float w = matrix[12] * pos.x + matrix[13] * pos.y + matrix[14] * pos.z + matrix[15];
-
     if (w < 0.01f) return false;
-
     float inv_w = 1.0f / w;
     screen.x *= inv_w;
     screen.y *= inv_w;
-
     float x = windowWidth / 2.0f;
     float y = windowHeight / 2.0f;
-
     x += 0.5f * screen.x * windowWidth + 0.5f;
     y -= 0.5f * screen.y * windowHeight + 0.5f;
-
     screen.x = x;
     screen.y = y;
     return true;
